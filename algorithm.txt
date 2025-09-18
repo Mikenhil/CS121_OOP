@@ -1,0 +1,77 @@
+
+OOP Algorithm for a Horse Race Game
+=====================================================================================================
+
+CLASS Horse()
+	DECLARE VARIABLE INT horseID
+	DECLARE VARIABLE INT position (Default: 0)
+	DECLARE VARIABLE INT trackSize (Default: 15)
+	
+	CONSTRUCTOR HORSE(int id)
+		ASSIGN horseID = id
+		ASSIGN position = 0
+		ASSIGN trackSize = 15
+
+	METHOD tryMove(): void
+		DECLARE VARIABLE INT coin ASSIGN RandomRange(0-1)
+		INCREMENT position by coin
+	
+	METHOD printLane(): void
+		DECLARE VARIABLE INT i (Default: 0)
+		FORLOOP INCREMENT i by (trackSize - 1)
+			IF position EQUALS i
+				PRINT horseID + " "
+			ELSE
+				PRINT ". "
+
+		PRINT NEWLINE
+				
+
+	METHOD isWinner(): Bool
+		DECLARE VARIABLE BOOL winner ASSIGN False
+		IF position EQUALS (trackSize - 1)
+			ASSIGN winner = True
+			PRINT "Winner is " + horseID
+
+		RETURN winner
+
+==================================================================================================
+
+CLASS Race()
+	DECLARE VARIABLE Horse[] horses
+	DECLARE VARIABLE INT numHorses
+
+	CONSTRUCTOR Race()
+		DECLARE VARIABLE INT i (Default: 0)
+		ASSIGN horses = horses[numHorses]
+
+		FORLOOP INCREMENT i by (numHorses - 1)
+			SET horses[i] = new Horse(i)
+
+	METHOD raceLoop()
+		DECLARE VARIABLE BOOL keepGoing Assign True
+		WHILELOOP Condition(keepGoing EQUALS True)
+			
+			DECLARE VARIABLE INT i
+			FORLOOP INCREMENT i by (numHorses - 1)
+				CALL horses[i].tryMove()
+				CALL horses[i].printLane()
+				
+				IF horses[i].isWinner() EQUALS True
+					ASSIGN keepGOing = False
+
+			INPUT (Ignore specific keys and progress to next loop)				
+
+PROGRAM MAIN
+	DECLARE CLASS VARIABLE race
+
+	FUNCTION initRace(): void
+		ASSIGN race = new Race()
+		CALL race.raceLoop()
+
+	FUNCTION main(): int
+		CALL initRace()
+
+		RETURN 0
+		
+	
