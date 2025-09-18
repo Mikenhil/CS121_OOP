@@ -60,7 +60,9 @@ CLASS Race()
 				IF horses[i].isWinner() EQUALS True
 					ASSIGN keepGOing = False
 
-			INPUT (Ignore specific keys and progress to next loop)				
+			INPUT (Ignore specific keys and progress to next loop)		
+
+=============================================================================================================================================================
 
 PROGRAM MAIN
 	DECLARE CLASS VARIABLE race
