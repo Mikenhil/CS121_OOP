@@ -1,24 +1,29 @@
+
+#include <iostream>
+#include <random>
+
 class Horse {
 	int horseID;
 	int position;
 	int trackSize;
 
 	public:
-		Horse(int id) {
-			horseID = id;
+		Horse() {
 			position = 0;
 			trackSize = 15;
-		}	
+		}
 
 	public:
 		void tryMove() {
-			int coin = 0;
+			std::random_device rd;
+			std::uniform_int_distribution<int> dist(0, 1);
+			int coin = dist(rd);
 			position += coin;
 		}
 
 	public:
 		void printLane() {
-			for(int i = 0; i < trackSize; i++) {
+			for(int i = 0; i < trackSize - 1; i++) {
 				if(position == i) {
 					std::cout << horseID << " ";
 				}
@@ -39,19 +44,24 @@ class Horse {
 
 			return winner;
 		}
-}
+	
+	public:
+		void setID(int id) {
+			horseID = id;
+		}
+};
 
 class Race {
-	Horse[] horses;
+	Horse horses[5];
 	int numHorses;
 
 	public:
 		Race() {
 			numHorses = 5;
-			horses = Horse[numHorses];
 
 			for(int i = 0; i < numHorses; i++) {
-				Horse newHorse = new Horse(i);
+				Horse newHorse;
+				newHorse.setID(i);
 				horses[i] = newHorse;
 			}
 		}
@@ -73,13 +83,12 @@ class Race {
 				std::cin.ignore();
 			}
 		}
-}
+};
 
 Race race;
 
 int main() {
-	race = new Race();
-	race.raceLoop()
+	race.raceLoop();
 
 	return 0;
 }
